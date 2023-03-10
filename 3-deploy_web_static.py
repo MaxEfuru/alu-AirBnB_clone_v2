@@ -1,48 +1,76 @@
 #!/usr/bin/python3
-#!/usr/bin/env python3
-"""
-This module contains a Fabric script for deploying a web_static archive to web servers
-"""
-from fabric.api import env, run, put
-from os import path
+"""Comment"""
+from fabric.api import *
+import os
+import re
 from datetime import datetime
-# Set the user and IP address for accessing the web servers
+
 env.user = 'ubuntu'
 env.hosts = ['54.242.117.7', '54.226.19.77']
 
 
 def do_pack():
-    now = datetime.now()
-    archive_path = "versions/web_static_{}{}{}{}{}{}.tgz".format(
-        now.year, now.month, now.day, now.hour, now.minute, now.second)
+    """Function to compress files in an archive"""
     local("mkdir -p versions")
-    local("tar -cvzf {} web_static".format(archive_path))
-    if path.exists(archive_path):
-        return archive_path
-    else:
+    filename = "versions/web_static_{}.tgz".format(datetime.strftime(
+        datetime.now(),
+        "%Y%m%d%H%M%S"))
+    result = local("tar -cvzf {} web_static"
+                   .format(filename))
+    if result.failed:
         return None
+    return filename
+
 
 def do_deploy(archive_path):
-    if not path.exists(archive_path):
+    """Comment"""
+    if not os.path.isfile(archive_path):
         return False
 
-    put(archive_path, "/tmp/")
-    filename = archive_path.split("/")[-1]
-    folder_name = "/data/web_static/releases/" + filename[:-4]
-    run("mkdir -p {}".format(folder_name))
-    run("tar -xzf /tmp/{} -C {}".format(filename, folder_name))
-    run("rm /tmp/{}".format(filename))
-    run("rm -f /data/web_static/current")
-    run("ln -s {} /data/web_static/current".format(folder_name))
+    filename_regex = re.compile(r'[^/]+(?=\.tgz$)')
+    match = filename_regex.search(archive_path)
+
+    archive_filename = match.group(0)
+    result = put(archive_path, "/tmp/{}.tgz".format(archive_filename))
+    if result.failed:
+        return False
+    result = run(
+        "mkdir -p /data/web_static/releases/{}/".format(archive_filename))
+    if result.failed:
+        return False
+    result = run("tar -xzf /tmp/{}.tgz -C /data/web_static/releases/{}/"
+                 .format(archive_filename, archive_filename))
+    if result.failed:
+        return False
+    result = run("rm /tmp/{}.tgz".format(archive_filename))
+    if result.failed:
+        return False
+    result = run("mv /data/web_static/releases/{}"
+                 "/web_static/* /data/web_static/releases/{}/"
+                 .format(archive_filename, archive_filename))
+    if result.failed:
+        return False
+    result = run("rm -rf /data/web_static/releases/{}/web_static"
+                 .format(archive_filename))
+    if result.failed:
+        return False
+
+    result = run("rm -rf /data/web_static/current")
+    if result.failed:
+        return False
+
+    result = run("ln -s /data/web_static/releases/{}/ /data/web_static/current"
+                 .format(archive_filename))
+    if result.failed:
+        return False
 
     return True
 
-def deploy():
-    """
-    Deploy web_static archive to web servers
-    """
-    archive_path = do_pack()
-    if archive_path is None:
-        return False
-    return do_deploy(archive_path)
 
+def deploy():
+    """Deploy"""
+    archive_pack = do_pack()
+    if archive_pack is None:
+        return False
+    deployed = do_deploy(archive_pack)
+    return deployed
