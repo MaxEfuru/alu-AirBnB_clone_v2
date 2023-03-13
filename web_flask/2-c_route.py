@@ -8,19 +8,17 @@ app.url_map.strict_slashes = False
 
 @app.route("/")
 def home():
-    # """ default home route """
+    """ default home route """
     return "Hello HBNB!"
-
 
 @app.route("/hbnb")
 def hbnb():
-    # hbnb end point
+    """  hbnb end point """
     return "HBNB"
-
 
 @app.route("/c/<text>")
 def c_route(text):
-    # taking argument for displaying c
+    """ taking argument for displaying c """
     takeout = text.replace("_", " ")
     return f"C {takeout}"
 
