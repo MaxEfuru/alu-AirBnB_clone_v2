@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # flask application starting
-""" flask application starting """
+""" moving to end points  """
 from flask import Flask
 app = Flask(__name__)
 app.url_map.strict_slashes = False
@@ -11,16 +11,18 @@ def home():
     """ default home route """
     return "Hello HBNB!"
 
+
 @app.route("/hbnb")
 def hbnb():
     """  hbnb end point """
     return "HBNB"
 
+
 @app.route("/c/<text>")
-def c_route(text):
+def c(text):
     """ taking argument for displaying c """
     takeout = text.replace("_", " ")
-    return f"C {takeout}"
+    return f'C {escape(takeout)}'
 
 
 if __name__ == '__main__':
