@@ -11,6 +11,11 @@ def home():
     # """ default home route """
     return "Hello HBNB!"
 
+@app.route("/hbnb")
+def hbnb():
+    # hbnb end point
+    return "HBNB"
+
 
 if __name__ == '__main__':
     # """ everything starts here """
