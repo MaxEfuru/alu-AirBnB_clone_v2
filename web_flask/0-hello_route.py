@@ -5,10 +5,11 @@ from flask import Flask
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 
+
 @app.route("/")
 def home():
     # """ default home route """
-    return "Hellow HBNB!"
+    return "Hello HBNB!"
 
 
 if __name__ == '__main__':
