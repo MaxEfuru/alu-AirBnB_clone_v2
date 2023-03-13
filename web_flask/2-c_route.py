@@ -1,8 +1,9 @@
 #!/usr/bin/python3
-# flask application starting
 """ moving to end points  """
 from flask import Flask
 from markupsafe import escape
+
+
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 
