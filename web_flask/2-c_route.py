@@ -6,7 +6,7 @@ from markupsafe import escape
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
-
+""" JUST EXTRA DOCUMENTATION """
 
 @app.route("/")
 def home():
@@ -21,7 +21,7 @@ def hbnb():
 
 
 @app.route("/c/<text>")
-def c(text):
+def info_c(text):
     """ taking argument for displaying c """
     takeout = text.replace("_", " ")
     return f'C {escape(takeout)}'
