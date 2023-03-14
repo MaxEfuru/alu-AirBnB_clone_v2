@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 """ moving to end points  """
 from flask import Flask
-from markupsafe import escape
-
 # commenting
 app = Flask(__name__)
 app.url_map.strict_slashes = False
@@ -24,8 +22,8 @@ def hbnb():
 @app.route("/c/<text>")
 def info_c(text):
     """ taking argument for displaying c """
-    takeout = text.replace("_", " ")
-    return 'C {}'.format(escape(takeout))
+    takeout = tiext.replace("_", " ")
+    return 'C {}'.format(takeout)
 
 
 if __name__ == '__main__':
