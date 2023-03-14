@@ -3,7 +3,7 @@
 from flask import Flask
 from markupsafe import escape
 
-
+# commenting 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 """ JUST EXTRA DOCUMENTATION """
