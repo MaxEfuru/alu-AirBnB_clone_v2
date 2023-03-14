@@ -21,7 +21,7 @@ def hbnb():
 @app.route("/c/<text>")
 def info_c(text):
     """ taking argument for displaying c """
-    takeout = tiext.replace("_", " ")
+    takeout = text.replace("_", " ")
     return 'C {}'.format(takeout)
 
 
