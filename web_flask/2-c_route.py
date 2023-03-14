@@ -1,10 +1,9 @@
 #!/usr/bin/python3
+# working with flask:x
 """ moving to end points  """
 from flask import Flask
-# commenting
 app = Flask(__name__)
 app.url_map.strict_slashes = False
-""" JUST EXTRA DOCUMENTATION """
 
 
 @app.route("/")
