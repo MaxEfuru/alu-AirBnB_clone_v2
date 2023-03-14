@@ -24,6 +24,7 @@ def info_c(text):
     takeout = text.replace("_", " ")
     return "C {}".format(takeout)
 
+
 @app.route('/python/')
 @app.route('/python/<text>')
 def pythonR(text='is cool'):
