@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 """ moving to end points  """
 from flask import Flask
-from markupsafe import escape
-
 # commenting
 app = Flask(__name__)
 app.url_map.strict_slashes = False
@@ -27,9 +25,9 @@ def info_c(text):
     takeout = text.replace("_", " ")
     return f'C {escape(takeout)}'
 
-
-@app.route("/python/<text>")
-def pythonR(text="is cool"):
+@app.route('/python/')
+@app.route('/python/<text>')
+def pythonR(text='is cool'):
     """ python is cool """
     takeout = text.replace("_", " ")
     return "Python {}".format(takeout)
