@@ -22,7 +22,7 @@ def hbnb():
 def info_c(text):
     """ taking argument for displaying c """
     takeout = text.replace("_", " ")
- i   return "C {}".format(takeout)
+    return "C {}".format(takeout)
 
 @app.route('/python/')
 @app.route('/python/<text>')
