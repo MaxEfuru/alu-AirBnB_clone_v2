@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-# working with flask
-""" moving to end points  """
+# working with flask, default routes
+""" working with default routes """
 from flask import Flask
 app = Flask(__name__)
 app.url_map.strict_slashes = False
