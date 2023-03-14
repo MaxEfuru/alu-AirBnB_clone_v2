@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-""" working with default routes """
+""" working with default routes
+    python is cool"""
 from flask import Flask
 app = Flask(__name__)
 app.url_map.strict_slashes = False
