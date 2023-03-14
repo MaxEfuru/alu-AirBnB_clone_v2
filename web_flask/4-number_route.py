@@ -34,6 +34,7 @@ def pythonR(text='is cool'):
 
 @app.route('/number/<int:n>')
 def number(n):
+    """ work for numbers only """
     return "{} is a number".format(n)
 
 
