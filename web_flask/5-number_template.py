@@ -3,6 +3,7 @@
     python is cool"""
 from flask import Flask
 from flask import render_template
+from markupsafe import Markup
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 
@@ -43,6 +44,7 @@ def number(n):
 @app.route('/number_template/<int:n>')
 def templateNumber(n):
     """ display template if only integer """
+    n = Markup.escape(n)
     return render_template('5-number.html', n=n)
 
 
