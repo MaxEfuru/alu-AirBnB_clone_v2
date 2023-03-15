@@ -52,12 +52,9 @@ def templateNumber(n):
 def templateOddEven(n):
     """ display odd or even """
     n = Markup.escape(n)
-    text = 'odd'
-    if n % 2 == 0:
-        text_n = 'even'
-    else:
-        text_n = 'odd'
-    return render_template('6-number_odd_or_even.html', n=n, text_n=text_n)
+    return render_template('6-number_odd_or_even.html', n=n,
+                           text_n=('even' if n % 2 == 0 else 'odd'))
+
 
 if __name__ == '__main__':
     # """ everything starts here """
