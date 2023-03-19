@@ -22,7 +22,7 @@ class State(BaseModel, Base):
         # def cities(self):
         #    """ list of city o=instances with state id"""
         #    all_cities = list(models.storage.all(City).values())
-        #   return list(filter(lambda city: (city.id == self.id), all_cities) 
+        #   return list(filter(lambda city: (city.id == self.id), all_cities)
         @property
         def cities(self):
             """ get list of city objects """
