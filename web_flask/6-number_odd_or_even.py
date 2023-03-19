@@ -51,9 +51,12 @@ def templateNumber(n):
 @app.route('/number_odd_or_even/<int:n>')
 def templateOddEven(n):
     """ display odd or even """
-    n = Markup.escape(n)
+    if n % 2 == 0:
+        odd_or_even = 'even'
+    else:
+        odd_or_even = 'odd'
     return render_template('6-number_odd_or_even.html', n=n,
-                           text_n=('even' if n % 2 == 0 else 'odd'))
+                           odd_or_even=odd_or_even)
 
 
 if __name__ == '__main__':
