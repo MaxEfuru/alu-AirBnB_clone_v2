@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """ list of states """
 from flask import Flask, render_template
-import models
+from models import storage
+from models.state import State
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
@@ -9,15 +10,14 @@ app.url_map.strict_slashes = False
 
 @app.route('/states_list')
 def states_list():
-    from models.state import State
-    states = models.storage.all(State).values()
+    states = storage.all(State).values()
     sorted_states = sorted(states, key=lambda state: state.name)
     return render_template('7-states_list.html', states=sorted_states)
 
 
 @app.teardown_appcontext
 def teardown_appcontext(exception):
-    models.storage.close()
+    storage.close()
 
 
 if __name__ == '__main__':
