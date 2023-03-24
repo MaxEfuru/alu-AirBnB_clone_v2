@@ -19,7 +19,7 @@ def states():
 @app.route('/states/<id>')
 def state_id(id):
     """ by states id """
-    all_state = storage.all('State')
+    all_states = storage.all('State')
     key = "State.{}".format(id)
     try:
         state = all_states[key]
