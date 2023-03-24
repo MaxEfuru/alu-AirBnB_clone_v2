@@ -14,7 +14,7 @@ def states():
     # states = sorted(storage.all('State').values(), key=lambda s: s.name)
     states = storage.all('State').values()
     return render_template('9-states.html', states=states,
-                          condition="states_list")
+                           condition="states_list")
 
 
 @app.route('/states/<id>')
