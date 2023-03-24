@@ -13,6 +13,7 @@ def states():
     states = sorted(storage.all('State').values(), key=lambda s: s.name)
     return render_template('states.html', states=states)
 
+
 @app.route('/states/<id>')
 def state_id(id):
     state = storage.all('State')
@@ -20,10 +21,9 @@ def state_id(id):
     try:
         state = all_states[key]
         return render_template('9-state.html', state=state,
-                condition="state_id")
-    except:
-        return render_template('9-states.html',condition='not_found')
-
+                               condition="state_id")
+    except IndexError:
+        return render_template('9-states.html', condition='not_found')
 
 
 @app.teardown_appcontext
