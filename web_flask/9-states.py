@@ -20,7 +20,7 @@ def state_id(id):
     key = "State.{}".format(id)
     try:
         state = all_states[key]
-        return render_template('9-state.html', state=state,
+        return render_template('9-states.html', state=state,
                                condition="state_id")
     except IndexError:
         return render_template('9-states.html', condition='not_found')
@@ -33,4 +33,4 @@ def teardown_appcontext(exception):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000)
