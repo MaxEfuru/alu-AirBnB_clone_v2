@@ -10,6 +10,7 @@ app.url_map.strict_slashes = False
 
 @app.route('/states')
 def states():
+    """ just some states """
     states = sorted(storage.all('State').values(), key=lambda s: s.name)
     retur render_template('9-states.html', states=states,
                           condition="states_list")
@@ -17,6 +18,7 @@ def states():
 
 @app.route('/states/<id>')
 def state_id(id):
+    """ by states id """
     all_state = storage.all('State')
     key = "State.{}".format(id)
     try:
