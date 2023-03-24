@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" list of states """
+""" working with flask """
 from flask import Flask, render_template
 from models import storage
 from models.state import State
@@ -11,8 +11,9 @@ app.url_map.strict_slashes = False
 @app.route('/states')
 def states():
     """ just some states """
-    states = sorted(storage.all('State').values(), key=lambda s: s.name)
-    retur render_template('9-states.html', states=states,
+    # states = sorted(storage.all('State').values(), key=lambda s: s.name)
+    states = storage.all('State').values()
+    return render_template('9-states.html', states=states,
                           condition="states_list")
 
 
@@ -25,12 +26,12 @@ def state_id(id):
         state = all_states[key]
         return render_template('9-states.html', state=state,
                                condition="state_id")
-    except IndexError:
+    except:
         return render_template('9-states.html', condition='not_found')
 
 
 @app.teardown_appcontext
-def teardown_appcontext(exception):
+def teardown(self):
     """ just some quick teardown """
     storage.close()
 
