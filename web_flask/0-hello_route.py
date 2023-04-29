@@ -1,17 +1,16 @@
 #!/usr/bin/python3
-# flask application starting
-""" flask application starting """
+"""Flask web application"""
+
 from flask import Flask
+
 app = Flask(__name__)
-app.url_map.strict_slashes = False
 
 
-@app.route("/")
-def home():
-    # """ default home route """
+@app.route('/', strict_slashes=False)
+def hello_hbnb():
+    """Displays 'Hello HBNB!'"""
     return "Hello HBNB!"
 
 
-if __name__ == '__main__':
-    # """ everything starts here """
-    app.run(host="0.0.0.0", port=5000, debug=True)
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000)
